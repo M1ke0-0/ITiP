@@ -97,34 +97,4 @@ public class Task3 {
         }
     }
 
-    /**
-     * Альтернативная версия с детальным выводом найденных пар
-     * @param text исходный текст
-     */
-    @SuppressWarnings("unused")
-    private static void findAndDisplayPairs(String text) {
-        try {
-            System.out.println("\nИсходный текст: " + text);
-
-            Pattern pattern = Pattern.compile("([a-zа-яё])([A-ZА-ЯЁ])");
-            Matcher matcher = pattern.matcher(text);
-
-            boolean found = false;
-            System.out.println("Найденные пары:");
-
-            while (matcher.find()) {
-                found = true;
-                System.out.println("  Позиция " + matcher.start() + ": '" +
-                                 matcher.group(1) + matcher.group(2) +
-                                 "' (" + matcher.group(1) + " → " + matcher.group(2) + ")");
-            }
-
-            if (!found) {
-                System.out.println("  Переходы не найдены");
-            }
-
-        } catch (Exception e) {
-            System.err.println("Ошибка: " + e.getMessage());
-        }
-    }
 }

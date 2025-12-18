@@ -2,12 +2,6 @@ package lab5;
 
 import java.util.Scanner;
 
-/**
- * Демонстрационный класс для лабораторной работы №5
- * "Строки и регулярные выражения"
- *
- * Содержит меню для запуска всех заданий лабораторной работы.
- */
 public class Lab5Demo {
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
@@ -54,9 +48,6 @@ public class Lab5Demo {
         }
     }
 
-    /**
-     * Выводит главное меню программы
-     */
     private static void printMenu() {
         System.out.println("\n" + "=".repeat(70));
         System.out.println("     ЛАБОРАТОРНАЯ РАБОТА №5: СТРОКИ И РЕГУЛЯРНЫЕ ВЫРАЖЕНИЯ");

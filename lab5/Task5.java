@@ -144,49 +144,5 @@ public class Task5 {
         }
     }
 
-    /**
-     * Альтернативная версия с подсчетом вхождений каждого слова
-     * 
-     * @param text   текст для поиска
-     * @param letter начальная буква
-     */
-    @SuppressWarnings("unused")
-    private static void findWordsWithCount(String text, char letter) {
-        try {
-            System.out.println("\nПоиск слов, начинающихся с буквы '" + letter + "' (с подсчетом):");
-
-            String escapedLetter = Pattern.quote(String.valueOf(letter));
-            Pattern pattern = Pattern.compile(
-                    "\\b" + escapedLetter + "\\w*",
-                    Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CHARACTER_CLASS);
-
-            Matcher matcher = pattern.matcher(text);
-
-            List<String> allMatches = new ArrayList<>();
-            while (matcher.find()) {
-                allMatches.add(matcher.group());
-            }
-
-            if (allMatches.isEmpty()) {
-                System.out.println("  Слова не найдены");
-                return;
-            }
-
-            System.out.println("  Всего найдено: " + allMatches.size() + " вхождений");
-            System.out.println("  Слова с количеством повторений:");
-
-            // Подсчет уникальных слов
-            java.util.Map<String, Integer> wordCount = new java.util.HashMap<>();
-            for (String word : allMatches) {
-                wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
-            }
-
-            for (java.util.Map.Entry<String, Integer> entry : wordCount.entrySet()) {
-                System.out.println("    " + entry.getKey() + " - " + entry.getValue() + " раз(а)");
-            }
-
-        } catch (Exception e) {
-            System.err.println("Ошибка: " + e.getMessage());
-        }
-    }
+    
 }

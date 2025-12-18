@@ -3,12 +3,6 @@ package lab5;
 import java.util.Scanner;
 import java.util.regex.*;
 
-/**
- * Задание 4. Проверка корректности ввода IP-адреса
- * IP-адрес должен:
- * - Состоять из 4 чисел, разделенных точками
- * - Каждое число должно быть в диапазоне от 0 до 255
- */
 public class Task4 {
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
@@ -45,7 +39,6 @@ public class Task4 {
                 validateIP(ip);
             }
 
-            // Интерактивный режим
             System.out.println("\n--- Интерактивный режим ---");
             System.out.println("Введите IP-адрес для проверки (или 'exit' для выхода):");
 
@@ -85,7 +78,7 @@ public class Task4 {
             Matcher matcher = basicPattern.matcher(ip);
 
             if (!matcher.matches()) {
-                System.out.println("❌ НЕВЕРНО: некорректный формат IP-адреса");
+                System.out.println(" НЕВЕРНО: некорректный формат IP-адреса");
                 System.out.println("   Ожидается формат: XXX.XXX.XXX.XXX (где X - цифра)");
                 return;
             }
@@ -96,21 +89,21 @@ public class Task4 {
 
                 // Проверка на ведущие нули (кроме "0")
                 if (octet.length() > 1 && octet.startsWith("0")) {
-                    System.out.println("❌ НЕВЕРНО: октет \"" + octet + "\" содержит ведущий ноль");
+                    System.out.println(" НЕВЕРНО: октет \"" + octet + "\" содержит ведущий ноль");
                     System.out.println("   IP-адреса не должны содержать ведущие нули");
                     return;
                 }
 
                 int value = Integer.parseInt(octet);
                 if (value < 0 || value > 255) {
-                    System.out.println("❌ НЕВЕРНО: октет \"" + octet + "\" вне диапазона [0-255]");
+                    System.out.println("НЕВЕРНО: октет \"" + octet + "\" вне диапазона [0-255]");
                     System.out.println("   Значение: " + value);
                     return;
                 }
             }
 
             // Все проверки пройдены
-            System.out.println("✅ ВЕРНО: IP-адрес корректен");
+            System.out.println("ВЕРНО: IP-адрес корректен");
             System.out.println("   Октеты: " + matcher.group(1) + ", " +
                              matcher.group(2) + ", " +
                              matcher.group(3) + ", " +
@@ -125,32 +118,4 @@ public class Task4 {
         }
     }
 
-    /**
-     * Альтернативная версия с более сложным регулярным выражением
-     * Проверяет IP-адрес одним регулярным выражением
-     * @param ip IP-адрес для проверки
-     * @return true если IP корректен
-     */
-    @SuppressWarnings("unused")
-    private static boolean validateIPAdvanced(String ip) {
-        try {
-            // Сложное регулярное выражение, проверяющее диапазон 0-255 для каждого октета:
-            // (25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?) - один октет:
-            //   25[0-5] - 250-255
-            //   2[0-4][0-9] - 200-249
-            //   [01]?[0-9][0-9]? - 0-199
-            String ipPattern =
-                "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
-                "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
-                "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
-                "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
-
-            Pattern pattern = Pattern.compile(ipPattern);
-            return pattern.matcher(ip).matches();
-
-        } catch (Exception e) {
-            System.err.println("Ошибка при проверке: " + e.getMessage());
-            return false;
-        }
-    }
 }
